@@ -27,4 +27,12 @@ if __name__ == '__main__':
     print(reverse)
 
     print("--- queue test ---")
+    que_ob1 = Queue()
+
+    for i in range(0,10):
+        que_ob1.enqueue(i)
+
+    while que_ob1.size():
+        print(que_ob1.dequeue())
+
     
