@@ -1,4 +1,5 @@
 from stack import Stack
+from queue import Queue
 
 if __name__ == '__main__':
     stk_ob1 = Stack()
@@ -24,3 +25,6 @@ if __name__ == '__main__':
 
     print(name)
     print(reverse)
+
+    print("--- queue test ---")
+    
