@@ -1,38 +1,44 @@
 from stack import Stack
 from queue import Queue
+import time
+import random
+
+def simulate_line(till_show, max_time, num_cus):
+    pq = Queue()
+    tix_sold = []
+
+    for i in range(1, num_cus + 1):
+        pq.enqueue("person_" + str(i))
+
+    print("--- Show waiting customers ---")
+    i = pq.size() - 1
+    while i >= 0:
+        print(pq.showqueue(i))
+        i -= 1
+    print("--- end ---\n")
+
+    t_end = time.time() + till_show
+    print("t_end", t_end)
+    now = time.time()
+    print("now", now)
+    print("***", pq.size(), t_end - now)
+    i = 0
+    while now < t_end and not pq.is_empty():
+        print("i = ", i)
+        now = time.time()
+        r = random.randint(0, max_time)
+        time.sleep(r)
+        person = pq.dequeue()
+        print("{}, {} : {}".format(now, r, person))
+        tix_sold.append(person)
+        i += 1
+        return tix_sold
+
 
 if __name__ == '__main__':
-    stk_ob1 = Stack()
-    print(stk_ob1.is_empty())
-
-    stk_ob1.push(10)
-    print(stk_ob1.is_empty())
-
-    for i in range(0, 10):
-        stk_ob1.push(i)
-
-    print(stk_ob1.peek())
-    print(stk_ob1.size())
-
-    stk_ob2 = Stack()
-    name = "Haruto"
-    for ch in name:
-        stk_ob2.push(ch)
-
-    reverse = ""
-    while stk_ob2.size():
-        reverse += stk_ob2.pop()
-
-    print(name)
-    print(reverse)
-
-    print("--- queue test ---")
-    que_ob1 = Queue()
-
-    for i in range(0,10):
-        que_ob1.enqueue(i)
-
-    while que_ob1.size():
-        print(que_ob1.dequeue())
-
-    
+    # def simulate_line(till_show, max_time, num_cus)
+    # till_show : time until a move starts
+    # max_time : maximum time that one person buy a ticket
+    # num_cus : number of customers
+    sold = simulate_line(5, 3, 120)
+    print(sold)
